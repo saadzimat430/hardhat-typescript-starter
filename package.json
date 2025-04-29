@@ -8,7 +8,7 @@
     "test": "npx hardhat test",
     "deploy": "npx hardhat run scripts/deploy.ts --network localhost",
     "typechain": "typechain --target ethers-v6 --out-dir typechain",
-    "lint": "eslint './**/*.{ts,tsx}' --fix",
+    "lint": "eslint --ext .ts,.tsx . --fix",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -19,6 +19,8 @@
     "@types/chai": "^4.3.11",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.12.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
     "dotenv": "^16.4.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
