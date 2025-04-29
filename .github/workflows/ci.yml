@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node
+      - name: Use Node.js 18 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      # 3. Install dependencies exactly as in package-lock.json
+      - name: Install deps
+        run: npm ci
+
+      # 4. Compile Solidity + TypeScript
+      - name: Hardhat compile
+        run: npm run compile
+
+      # 5. Run unit tests
+      - name: Test
+        run: npm test
+
+env:
+  SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
+  PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+  ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
